@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vikas S. Dwivedi — Engineering Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --surface2: #1a1f2b;
+    --border: #252a38;
+    --accent: #e8a440;
+    --accent2: #4fa8d5;
+    --text: #e8eaf0;
+    --muted: #7a8499;
+    --tag-bg: #1e2433;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(13,15,20,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 4rem;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.03em;
+    color: var(--accent);
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 80px 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 50%, rgba(232,164,64,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(79,168,213,0.05) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.25;
+  }
+  .hero-content { position: relative; max-width: 700px; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 32px; height: 1px; background: var(--accent);
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 900;
+    line-height: 1.08;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+  h1 span { color: var(--accent); }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 540px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 3rem; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.4rem 1rem;
+    border-radius: 2px;
+    letter-spacing: 0.04em;
+  }
+  .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .badge .dot.blue { background: var(--accent2); }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.25s;
+    cursor: pointer;
+  }
+  .btn-primary { background: var(--accent); color: #0d0f14; }
+  .btn-primary:hover { background: #f0b455; transform: translateY(-2px); }
+  .btn-ghost { border: 1px solid var(--border); color: var(--muted); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ---- SECTIONS ---- */
+  section { padding: 6rem 4rem; }
+  .section-label {
+    display: flex; align-items: center; gap: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .section-label::after {
+    content: ''; flex: 1; max-width: 80px; height: 1px; background: var(--border);
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+  h2 em { font-style: italic; color: var(--accent); }
+  .section-intro {
+    color: var(--muted);
+    max-width: 600px;
+    margin-bottom: 3.5rem;
+    font-size: 1.0rem;
+    line-height: 1.8;
+  }
+
+  /* ---- SKILLS ---- */
+  #skills { background: var(--surface); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 1.75rem;
+    border-radius: 4px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .skill-icon {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+  .skill-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag {
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.72rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ---- PROJECTS ---- */
+  #projects { background: var(--bg); }
+  .project-list { display: flex; flex-direction: column; gap: 5rem; }
+
+  .project-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding-bottom: 5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .project-block:last-child { border-bottom: none; padding-bottom: 0; }
+  .project-block.reverse { direction: rtl; }
+  .project-block.reverse > * { direction: ltr; }
+
+  .project-img-wrap {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    aspect-ratio: 4/3;
+  }
+  .project-img-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .project-img-wrap:hover img { transform: scale(1.04); }
+  .project-img-badge {
+    position: absolute; bottom: 12px; left: 12px;
+    background: rgba(13,15,20,0.82);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border);
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.1em;
+    padding: 0.35rem 0.85rem;
+    border-radius: 2px;
+  }
+
+  .project-info { }
+  .project-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+  }
+  .project-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+  .project-company {
+    font-size: 0.82rem;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+  .project-desc {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+
+  /* multi-image gallery */
+  .project-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .project-gallery img {
+    width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;
+    transition: transform 0.4s ease;
+  }
+  .project-gallery img:hover { transform: scale(1.06); z-index: 1; }
+  .project-gallery img.wide { grid-column: span 2; aspect-ratio: 16/7; }
+
+  /* single full img */
+  .project-img-single {
+    border-radius: 4px; overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+  }
+  .project-img-single img { width: 100%; display: block; }
+
+  /* ---- FURNITURE SECTION ---- */
+  #furniture { background: var(--surface); }
+  .furniture-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .furn-item {
+    position: relative;
+    border-radius: 4px; overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    aspect-ratio: 4/3;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+  .furn-item:hover { border-color: var(--accent); }
+  .furn-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.45s; }
+  .furn-item:hover img { transform: scale(1.07); }
+  .furn-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(13,15,20,0.92));
+    padding: 1.5rem 1rem 0.85rem;
+    font-size: 0.8rem; color: var(--muted);
+    font-weight: 500;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .furn-item:hover .furn-caption { opacity: 1; }
+  .furn-item.large { grid-column: span 2; aspect-ratio: 16/9; }
+
+  /* ---- ELECTRONICS ---- */
+  #electronics { background: var(--bg); }
+  .elec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .elec-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .elec-card:hover { border-color: var(--accent2); transform: translateY(-4px); }
+  .elec-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+  }
+  .elec-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.75; margin-bottom: 1.25rem; }
+  .status-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.7rem; font-family: 'DM Mono', monospace;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent2);
+    border: 1px solid rgba(79,168,213,0.3);
+    padding: 0.3rem 0.75rem; border-radius: 2px;
+  }
+  .status-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+  /* ---- DRAWINGS ---- */
+  #drawings { background: var(--surface); }
+  .drawings-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .drawing-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .drawing-card:hover { border-color: var(--accent); }
+  .drawing-preview {
+    background: #fff;
+    aspect-ratio: 4/3;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    color: #666;
+    overflow: hidden;
+  }
+  .drawing-preview img { width: 100%; height: 100%; object-fit: contain; }
+  .drawing-info { padding: 1rem 1.25rem; }
+  .drawing-info h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.25rem; }
+  .drawing-info p { font-size: 0.75rem; color: var(--muted); }
+  .drawing-meta { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+
+  /* ---- EXPERIENCE TIMELINE ---- */
+  #experience { background: var(--bg); }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .tl-item { position: relative; margin-bottom: 3rem; }
+  .tl-dot {
+    position: absolute; left: -2.4rem; top: 0.35rem;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--bg);
+  }
+  .tl-dot.blue { background: var(--accent2); }
+  .tl-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+  .tl-item h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  .tl-company {
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .tl-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.75; }
+
+  /* ---- CONTACT ---- */
+  #contact { background: var(--surface); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .contact-left h2 { margin-bottom: 1rem; }
+  .contact-left p { color: var(--muted); margin-bottom: 2rem; line-height: 1.8; }
+  .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.3s;
+  }
+  .contact-item:hover { border-color: var(--accent); }
+  .contact-icon { font-size: 1.2rem; }
+  .contact-label { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 2rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  footer .logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  /* ---- DIVIDER ---- */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 100px 1.5rem 3rem; }
+    .project-block { grid-template-columns: 1fr; gap: 2rem; }
+    .project-block.reverse { direction: ltr; }
+    .furniture-grid { grid-template-columns: repeat(2, 1fr); }
+    .furn-item.large { grid-column: span 2; }
+    .drawings-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+  @media (max-width: 560px) {
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; }
+    h1 { font-size: 2.4rem; }
+    .furniture-grid { grid-template-columns: 1fr; }
+    .furn-item.large { grid-column: span 1; }
+    .drawings-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-content > * { animation: fadeUp 0.7s ease both; }
+  .hero-eyebrow { animation-delay: 0.1s; }
+  h1 { animation-delay: 0.2s; }
+  .hero-sub { animation-delay: 0.3s; }
+  .hero-badges { animation-delay: 0.4s; }
+  .hero-cta { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">VSD</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#furniture">Furniture</a></li>
+    <li><a href="#electronics">Electronics</a></li>
+    <li><a href="#drawings">Drawings</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Mechanical Design · Robotics · Electronics</div>
+    <h1>Vikas S.<br><span>Dwivedi</span></h1>
+    <p class="hero-sub">M.Sc. AIMS student at Hochschule Coburg with a strong foundation in mechanical design, robotics, sensor integration, and furniture development. Currently expanding into electronics, automation, and signal processing.</p>
+    <div class="hero-badges">
+      <span class="badge"><span class="dot"></span> SolidWorks &amp; ANSYS</span>
+      <span class="badge"><span class="dot"></span> Robotics &amp; Prototyping</span>
+      <span class="badge"><span class="dot blue"></span> Arduino &amp; Sensors</span>
+      <span class="badge"><span class="dot blue"></span> Python &amp; MATLAB</span>
+      <span class="badge"><span class="dot"></span> Furniture Design</span>
+      <span class="badge"><span class="dot"></span> Telecom Permits (USA)</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Core Competencies</div>
+  <h2>Skills &amp; <em>Expertise</em></h2>
+  <p class="section-intro">A blend of precision mechanical engineering with a growing command of electronics, automation, and programming — built across industry and academia.</p>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">⚙️</div>
+      <h3>CAD &amp; Simulation</h3>
+      <div class="skill-tags">
+        <span class="tag">SolidWorks</span>
+        <span class="tag">AutoCAD</span>
+        <span class="tag">ANSYS Structural</span>
+        <span class="tag">ANSYS Thermal</span>
+        <span class="tag">3D Printing</span>
+        <span class="tag">GD&amp;T</span>
+        <span class="tag">DfM</span>
+        <span class="tag">PLM</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🤖</div>
+      <h3>Robotics &amp; Prototyping</h3>
+      <div class="skill-tags">
+        <span class="tag">Mechanical Systems</span>
+        <span class="tag">Drive Mechanisms</span>
+        <span class="tag">Chassis Design</span>
+        <span class="tag">Assembly Modeling</span>
+        <span class="tag">Tolerance Analysis</span>
+        <span class="tag">On-site Installation</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔌</div>
+      <h3>Electronics (Growing)</h3>
+      <div class="skill-tags">
+        <span class="tag">Arduino</span>
+        <span class="tag">Sensor Integration</span>
+        <span class="tag">Edge Detection</span>
+        <span class="tag">Motor Control</span>
+        <span class="tag">Chemical Sensors</span>
+        <span class="tag">Measurement Systems</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">💻</div>
+      <h3>Programming</h3>
+      <div class="skill-tags">
+        <span class="tag">Python</span>
+        <span class="tag">MATLAB</span>
+        <span class="tag">C++</span>
+        <span class="tag">Image Processing</span>
+        <span class="tag">Data Processing</span>
+        <span class="tag">Signal Analysis</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🪑</div>
+      <h3>Furniture Design</h3>
+      <div class="skill-tags">
+        <span class="tag">Concept Development</span>
+        <span class="tag">3D Visualization</span>
+        <span class="tag">Material Selection</span>
+        <span class="tag">Technical Drawings</span>
+        <span class="tag">Supplier Coordination</span>
+        <span class="tag">Quality Control</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📐</div>
+      <h3>Engineering Permits</h3>
+      <div class="skill-tags">
+        <span class="tag">ALDOT (Alabama)</span>
+        <span class="tag">USA City Permits</span>
+        <span class="tag">Telecom Infrastructure</span>
+        <span class="tag">Layout Plans</span>
+        <span class="tag">Regulatory Compliance</span>
+        <span class="tag">90% Acceptance Rate</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Engineering Work</div>
+  <h2>Featured <em>Projects</em></h2>
+  <p class="section-intro">Mechanical systems designed and built from concept through production — robots, go-karts, and solar automation.</p>
+
+  <div class="project-list">
+
+    <!-- Dependent Bot -->
+    <div class="project-block">
+      <div class="project-img-single">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/SolarPanelArray.jpg/1280px-SolarPanelArray.jpg"
+             onerror="this.style.background='#1a1f2b';this.src=''"
+             alt="Dependent Bot – Solar Panel Cleaner"
+             style="width:100%;display:block;border-radius:4px;min-height:220px;object-fit:cover;background:#1a1f2b;">
+        <div style="padding:1rem;background:var(--surface2);">
+          <p style="font-size:0.78rem;color:var(--muted);font-family:'DM Mono',monospace;">SolidWorks multi-view · Dependent Bot · Field deployment</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div class="project-num">01 / ROBOTICS</div>
+        <h3>Dependent Bot — Solar Panel Cleaner</h3>
+        <div class="project-company">Inov Robotics Pvt. Ltd.</div>
+        <p class="project-desc">A two-unit autonomous cleaning machine for large solar power plants. A horizontal big-bot provides lateral travel while a vertical small-bot handles panel-to-panel movement via belt-and-pulley drive, with dual brushes for waterless, low-damage cleaning coverage. I led 2D/3D design, thermodynamic analysis, team planning, and on-site installation.</p>
+        <div class="project-tech">
+          <span class="tag">SolidWorks</span>
+          <span class="tag">ANSYS Thermal</span>
+          <span class="tag">Belt &amp; Pulley</span>
+          <span class="tag">Brush Mechanism</span>
+          <span class="tag">Waterless Cleaning</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Independent Bot -->
+    <div class="project-block reverse">
+      <div class="project-img-single">
+        <div style="background:var(--surface2);border-radius:4px;border:1px solid var(--border);padding:2rem;text-align:center;min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;">
+          <div style="font-size:3rem;">🤖</div>
+          <p style="font-size:0.85rem;color:var(--muted);">360° Autonomous Rooftop Robot<br>with Edge Detection Sensors</p>
+          <p style="font-size:0.72rem;color:var(--border);font-family:'DM Mono',monospace;">SolidWorks · Front / Left / Top / Trimetric views</p>
+        </div>
+      </div>
+      <div class="project-info">
+        <div class="project-num">02 / ROBOTICS</div>
+        <h3>Independent Bot — Autonomous Cleaner</h3>
+        <div class="project-company">Inov Robotics Pvt. Ltd.</div>
+        <p class="project-desc">A fully autonomous 4-wheeled rooftop cleaning robot capable of 360° navigation. Dual brushes (front &amp; rear) sweep solar panels while edge-detection sensors prevent falls. Once activated, it follows predefined logic to systematically cover designated areas without manual intervention.</p>
+        <div class="project-tech">
+          <span class="tag">SolidWorks</span>
+          <span class="tag">ANSYS</span>
+          <span class="tag">Edge Detection</span>
+          <span class="tag">Autonomous Navigation</span>
+          <span class="tag">Sensor Integration</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Go-Kart -->
+    <div class="project-block">
+      <div style="background:var(--surface2);border-radius:4px;border:1px solid var(--border);padding:2rem;min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;">
+        <div style="font-size:3rem;">⚡</div>
+        <p style="font-size:0.85rem;color:var(--muted);text-align:center;">Electric Go-Kart Competition<br>Drivetrain Integration · Custom Battery Pack</p>
+      </div>
+      <div class="project-info">
+        <div class="project-num">03 / COMPETITION</div>
+        <h3>Electric Go-Kart — Competition Build</h3>
+        <div class="project-company">University Competition Project</div>
+        <p class="project-desc">Led a team to design and build a competition-ready electric go-kart. Responsibilities included full mechanical assembly, drivetrain integration, and development of a custom lightweight battery pack optimized for performance and weight balance.</p>
+        <div class="project-tech">
+          <span class="tag">Drivetrain Design</span>
+          <span class="tag">Mechanical Assembly</span>
+          <span class="tag">Battery Pack</span>
+          <span class="tag">Team Leadership</span>
+          <span class="tag">Lightweight Engineering</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FURNITURE -->
+<section id="furniture">
+  <div class="section-label">Product Design</div>
+  <h2>Furniture <em>Design</em></h2>
+  <p class="section-intro">Conceptualized, modeled, and rendered complete furniture collections — from bedroom suites and bunk beds to a prayer unit and children's playground equipment. All work produced in SolidWorks with client-ready 3D visualization.</p>
+
+  <div class="furniture-grid">
+    <div class="furn-item large">
+      <img src="/mnt/user-data/uploads/f1.JPG" alt="Luxury Bedroom Interior Render" onerror="this.style.background='#1a1f2b'">
+      <div class="furn-caption">Luxury Bedroom Interior — Full 3D Render</div>
+    </div>
+    <div class="furn-item">
+      <img src="/mnt/user-data/uploads/33.JPG" alt="Bedroom Suite" onerror="this.style.background='#1a1f2b'">
+      <div class="furn-caption">Bedroom Suite — Wardrobe & Dressing Unit</div>
+    </div>
+    <div class="furn-item">
+      <img src="/mnt/user-data/uploads/8.JPG" alt="TV Unit Design" onerror="this.style.background='#1a1f2b'">
+      <div class="furn-caption">TV Entertainment Unit — SolidWorks Model</div>
+    </div>
+    <div class="furn-item">
+      <img src="/mnt/user-data/uploads/mandir_8.JPG" alt="Pooja Mandir" onerror="this.style.background='#1a1f2b'">
+      <div class="furn-caption">Pooja Mandir / Prayer Unit — Detailed 3D Model</div>
+    </div>
+    <div class="furn-item">
+      <img src="/mnt/user-data/uploads/Untitled__1_.JPG" alt="Laptop Tray" onerror="this.style.background='#1a1f2b'">
+      <div class="furn-caption">Laptop Bed Tray — Wood & Steel Composite</div>
+    </div>
+    <div class="furn-item">
+      <img src="/mnt/user-data/uploads/Untitled.JPG" alt="Playground Equipment" onerror="this.style.background='#1a1f2b'">
+      <div class="furn-caption">Children's Playground — Full Assembly Model</div>
+    </div>
+    <div class="furn-item">
+      <img src="/mnt/user-data/uploads/2.JPG" alt="Compact Bedroom" onerror="this.style.background='#1a1f2b'">
+      <div class="furn-caption">Compact Bedroom Render — Client Visualization</div>
+    </div>
+    <div class="furn-item">
+      <img src="/mnt/user-data/uploads/4.JPG" alt="Bunk Bed Red" onerror="this.style.background='#1a1f2b'">
+      <div class="furn-caption">Kids Bunk Bed with Storage Staircase — Variant A</div>
+    </div>
+    <div class="furn-item">
+      <img src="/mnt/user-data/uploads/5.JPG" alt="Room Layout" onerror="this.style.background='#1a1f2b'">
+      <div class="furn-caption">Living Room Space Planning — Top View Layout</div>
+    </div>
+    <div class="furn-item">
+      <img src="/mnt/user-data/uploads/6__1_.JPG" alt="Bunk Bed Walnut" onerror="this.style.background='#1a1f2b'">
+      <div class="furn-caption">Bunk Bed with Storage Staircase — Walnut Finish</div>
+    </div>
+    <div class="furn-item">
+      <img src="/mnt/user-data/uploads/25.JPG" alt="Office Layout" onerror="this.style.background='#1a1f2b'">
+      <div class="furn-caption">Open Office Layout — 3D Space Planning</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 3rem; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 2rem 2.5rem;">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:1rem;">Furniture Design Responsibilities</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem 2rem;">
+      <p style="color:var(--muted);font-size:0.87rem;">→ Designed concepts balancing aesthetics &amp; functionality in SolidWorks</p>
+      <p style="color:var(--muted);font-size:0.87rem;">→ Created client-ready 2D/3D visualizations for approvals</p>
+      <p style="color:var(--muted);font-size:0.87rem;">→ Researched materials, finishes &amp; manufacturing techniques</p>
+      <p style="color:var(--muted);font-size:0.87rem;">→ Prepared detailed technical drawings &amp; manufacturing specs</p>
+      <p style="color:var(--muted);font-size:0.87rem;">→ Coordinated with suppliers for timely material delivery</p>
+      <p style="color:var(--muted);font-size:0.87rem;">→ Participated in product testing &amp; quality control processes</p>
+      <p style="color:var(--muted);font-size:0.87rem;">→ Collaborated with production teams to resolve assembly issues</p>
+      <p style="color:var(--muted);font-size:0.87rem;">→ Monitored market trends to drive design innovation</p>
+    </div>
+  </div>
+</section>
+
+<!-- ELECTRONICS (GROWING) -->
+<section id="electronics">
+  <div class="section-label">Masters — AIMS Program</div>
+  <h2>Electronics &amp; <em>Automation</em></h2>
+  <p class="section-intro">Currently pursuing M.Sc. in Analytical Instruments, Measurement &amp; Sensor Technology at Hochschule Coburg. Actively building skills in electronics, embedded systems, and data-driven engineering.</p>
+
+  <div class="elec-grid">
+    <div class="elec-card">
+      <h3>🚗 Arduino Motorized Car</h3>
+      <p>Built a motorized vehicle using Arduino with edge-detection functionality. Integrated sensors to detect surface boundaries and trigger motor control responses — a hands-on first project bridging mechanical and electronic domains.</p>
+      <div class="skill-tags" style="margin-bottom:1rem;">
+        <span class="tag">Arduino</span>
+        <span class="tag">DC Motors</span>
+        <span class="tag">Edge Sensors</span>
+        <span class="tag">C++</span>
+      </div>
+      <span class="status-badge">Completed</span>
+    </div>
+
+    <div class="elec-card">
+      <h3>📊 Image &amp; Data Processing (MATLAB)</h3>
+      <p>Working on image processing pipelines using MATLAB — including filtering, segmentation, and feature extraction techniques. Applying signal processing fundamentals learned in Measurement Technology modules.</p>
+      <div class="skill-tags" style="margin-bottom:1rem;">
+        <span class="tag">MATLAB</span>
+        <span class="tag">Image Processing</span>
+        <span class="tag">Signal Analysis</span>
+        <span class="tag">Filtering</span>
+      </div>
+      <span class="status-badge">In Progress</span>
+    </div>
+
+    <div class="elec-card">
+      <h3>🐍 Data Processing with Python</h3>
+      <p>Developing data processing and analysis scripts in Python. Applying libraries for scientific computing and visualization, bridging towards automation and sensor data interpretation in real-world measurement systems.</p>
+      <div class="skill-tags" style="margin-bottom:1rem;">
+        <span class="tag">Python</span>
+        <span class="tag">NumPy / Pandas</span>
+        <span class="tag">Data Visualization</span>
+        <span class="tag">Automation</span>
+      </div>
+      <span class="status-badge">In Progress</span>
+    </div>
+
+    <div class="elec-card">
+      <h3>🔬 AIMS Academic Modules</h3>
+      <p>Coursework at Hochschule Coburg covering Chemical Sensors, Analytical Instrumentation, Measurement Technology, and Sensor Systems — providing theoretical grounding in precision measurement and sensor design.</p>
+      <div class="skill-tags" style="margin-bottom:1rem;">
+        <span class="tag">Chemical Sensors</span>
+        <span class="tag">Instrumentation</span>
+        <span class="tag">Sensor Systems</span>
+        <span class="tag">Measurement Tech</span>
+      </div>
+      <span class="status-badge">Ongoing</span>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNICAL DRAWINGS -->
+<section id="drawings">
+  <div class="section-label">Engineering Documentation</div>
+  <h2>Technical <em>Drawings</em></h2>
+  <p class="section-intro">Precision engineering drawings produced for Solavio Labs — components for solar panel cleaning robots, manufactured to tight tolerances in SS-304 and aluminium.</p>
+
+  <div class="drawings-grid">
+    <div class="drawing-card">
+      <div class="drawing-preview" style="background:#f5f5f5;padding:1rem;">
+        <div style="text-align:center;color:#333;">
+          <div style="font-size:2rem;">⭕</div>
+          <p style="font-size:0.72rem;margin-top:0.5rem;font-family:'DM Mono',monospace;">Wheel — SL DB 002<br>∅125mm · Al · Rubber Coating</p>
+        </div>
+      </div>
+      <div class="drawing-info">
+        <h4>Wheel (SL DB 002)</h4>
+        <p>∅125mm drive wheel, aluminium with rubber coating. 9× ∅24 holes on PCD82. Drawn: Vikas — Solavio Labs</p>
+        <div class="drawing-meta">
+          <span class="tag">Al</span><span class="tag">Ra1.6</span><span class="tag">1:2 Scale</span><span class="tag">400g</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawing-card">
+      <div class="drawing-preview" style="background:#f5f5f5;padding:1rem;">
+        <div style="text-align:center;color:#333;">
+          <div style="font-size:2rem;">━━━</div>
+          <p style="font-size:0.72rem;margin-top:0.5rem;font-family:'DM Mono',monospace;">Free Wheel Shaft — SL DB 014<br>SS-304 · M12 Thread · Qty 4</p>
+        </div>
+      </div>
+      <div class="drawing-info">
+        <h4>Free Wheel Shaft (SL DB 014)</h4>
+        <p>SS-304 stainless shaft, 106mm length, M12×20mm thread. Drawn: Vikas &amp; Prashant — Solavio Labs</p>
+        <div class="drawing-meta">
+          <span class="tag">SS-304</span><span class="tag">Ra1.6</span><span class="tag">1:1 Scale</span><span class="tag">90g</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawing-card">
+      <div class="drawing-preview" style="background:#f5f5f5;padding:1rem;">
+        <div style="text-align:center;color:#333;">
+          <div style="font-size:2rem;">🔩</div>
+          <p style="font-size:0.72rem;margin-top:0.5rem;font-family:'DM Mono',monospace;">Coupling Hub — SL DB 016<br>SS-304 · 10mm D-Shaft · Qty var.</p>
+        </div>
+      </div>
+      <div class="drawing-info">
+        <h4>Coupling Hub (SL DB 016)</h4>
+        <p>SS-304 coupling for 10mm D-shaft, ∅59mm PCD, 6× ∅5mm bolt holes. Drawn: Vikas — Solavio Labs</p>
+        <div class="drawing-meta">
+          <span class="tag">SS-304</span><span class="tag">1:1 Scale</span><span class="tag">75g</span><span class="tag">M3 Tap</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawing-card">
+      <div class="drawing-preview" style="background:#f5f5f5;padding:1rem;">
+        <div style="text-align:center;color:#333;">
+          <div style="font-size:2rem;">🏠</div>
+          <p style="font-size:0.72rem;margin-top:0.5rem;font-family:'DM Mono',monospace;">Floor Plan Layout<br>Residential · 2BHK · Permit-Ready</p>
+        </div>
+      </div>
+      <div class="drawing-info">
+        <h4>Residential Floor Plan</h4>
+        <p>2BHK layout including drawing room, kitchen, bedrooms with dimensions in metric. Window/door schedules included.</p>
+        <div class="drawing-meta">
+          <span class="tag">AutoCAD</span><span class="tag">2D Layout</span><span class="tag">Residential</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawing-card">
+      <div class="drawing-preview" style="background:#f5f5f5;padding:1rem;">
+        <div style="text-align:center;color:#333;">
+          <div style="font-size:2rem;">📡</div>
+          <p style="font-size:0.72rem;margin-top:0.5rem;font-family:'DM Mono',monospace;">ALDOT Permit Drawings<br>USA Telecom Infrastructure</p>
+        </div>
+      </div>
+      <div class="drawing-info">
+        <h4>USA Telecom Permit Plans</h4>
+        <p>Produced precise 2D engineering drawings and layout plans for US telecom infrastructure — achieving 90% permit acceptance rate across ALDOT and city submissions.</p>
+        <div class="drawing-meta">
+          <span class="tag">ALDOT</span><span class="tag">USA Permits</span><span class="tag">Telecom</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawing-card">
+      <div class="drawing-preview" style="background:#1a1f2b;padding:1rem;display:flex;align-items:center;justify-content:center;">
+        <div style="text-align:center;">
+          <div style="font-size:2rem;">🖨️</div>
+          <p style="font-size:0.72rem;margin-top:0.5rem;font-family:'DM Mono',monospace;color:var(--muted);">50+ CAD Parts &amp; Assemblies<br>Inov Robotics — 2018–2021</p>
+        </div>
+      </div>
+      <div class="drawing-info">
+        <h4>50+ Parts &amp; Assemblies (Inov Robotics)</h4>
+        <p>Designed and optimized 50+ 2D/3D CAD parts, validated through ANSYS simulations. Managed full revision history and engineering change orders.</p>
+        <div class="drawing-meta">
+          <span class="tag">SolidWorks</span><span class="tag">ANSYS</span><span class="tag">50+ Parts</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background:var(--bg);">
+  <div class="section-label">Career Path</div>
+  <h2>Professional <em>Experience</em></h2>
+  <p class="section-intro">From robotics workshops in Chennai to telecom permits in Pune — a trajectory built on precision, problem-solving, and expanding technical reach.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;">
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot blue"></div>
+        <div class="tl-date">Sep 2025 – Present</div>
+        <h3>M.Sc. AIMS Student</h3>
+        <div class="tl-company">Hochschule Coburg, Germany</div>
+        <p class="tl-desc">Analytical Instruments, Measurement &amp; Sensor Technology. Modules: Chemical Sensors, Analytical Instrumentation, Measurement Technology, Sensor Systems. Currently on exchange in Shanghai.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Apr 2022 – Jan 2024</div>
+        <h3>Design Engineer — Permit &amp; Aramis</h3>
+        <div class="tl-company">Expris IT Pvt. Ltd., Pune</div>
+        <p class="tl-desc">Produced 2D engineering drawings and layout plans for US telecom infrastructure projects. Achieved 90% permit acceptance rate through accurate regulatory compliance across ALDOT and city submissions.</p>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Nov 2018 – Dec 2021</div>
+        <h3>Design Engineer — Robotics</h3>
+        <div class="tl-company">Inov Robotics Pvt. Ltd., Chennai</div>
+        <p class="tl-desc">Designed 3+ complete mechanical systems from concept through production. Created 50+ 2D/3D CAD parts, validated via ANSYS. Led mechanical architecture for Solar Panel Cleaning Robots including chassis, drive &amp; brush mechanisms.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot blue"></div>
+        <div class="tl-date">Jun 2012 – May 2018</div>
+        <h3>B.E. Mechanical Engineering</h3>
+        <div class="tl-company">RTMNU, Nagpur, India</div>
+        <p class="tl-desc">Foundation in mechanical engineering principles — thermodynamics, manufacturing, materials science, and machine design.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-left">
+      <div class="section-label">Get in Touch</div>
+      <h2>Let's <em>Connect</em></h2>
+      <p>Open to internship opportunities from July 2025 in mechanical design, sensor technology, or automation. Based in Coburg, Germany — available to relocate.</p>
+      <div class="hero-badges" style="margin-bottom:0;">
+        <span class="badge"><span class="dot"></span> Available July 2025</span>
+        <span class="badge"><span class="dot blue"></span> Germany &amp; International</span>
+        <span class="badge"><span class="dot"></span> English · German A2 · Hindi</span>
+      </div>
+    </div>
+    <div class="contact-items">
+      <a class="contact-item" href="mailto:vikas.dwivedi.de@gmail.com">
+        <span class="contact-icon">✉️</span>
+        <div>
+          <div class="contact-label">Email</div>
+          <div>vikas.dwivedi.de@gmail.com</div>
+        </div>
+      </a>
+      <a class="contact-item" href="tel:+4915221014336">
+        <span class="contact-icon">📞</span>
+        <div>
+          <div class="contact-label">Phone</div>
+          <div>+49 152 2101 4336</div>
+        </div>
+      </a>
+      <div class="contact-item">
+        <span class="contact-icon">📍</span>
+        <div>
+          <div class="contact-label">Location</div>
+          <div>Coburg, Germany (Currently Shanghai for exchange)</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">🎓</span>
+        <div>
+          <div class="contact-label">Education</div>
+          <div>M.Sc. AIMS — Hochschule Coburg</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="logo">Vikas S. Dwivedi</span>
+  <span>Mechanical Design · Robotics · Growing in Electronics · Available July 2025</span>
+  <span>© 2025</span>
+</footer>
+
+</body>
+</html>
