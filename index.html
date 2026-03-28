@@ -95,7 +95,7 @@ h2{font-family:'Syne',sans-serif;font-size:clamp(1.65rem,3vw,2.8rem);font-weight
 .skl{list-style:none;display:flex;flex-direction:column;gap:.42rem}
 .skl li{font-family:'DM Mono',monospace;font-size:.79rem;color:var(--muted);display:flex;align-items:center;gap:.48rem;transition:color .2s}
 .skl li:hover{color:var(--text)}
-.skl li::before{content:'&#8250;';color:var(--acc)}
+
 #projects{background:var(--bg2)}
 .pf{display:flex;gap:.42rem;flex-wrap:wrap;margin-bottom:1.9rem}
 .fb{font-family:'DM Mono',monospace;font-size:.69rem;letter-spacing:.08em;text-transform:uppercase;padding:.32rem .82rem;border:1px solid var(--bdr);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}
@@ -149,7 +149,7 @@ h2{font-family:'Syne',sans-serif;font-size:clamp(1.65rem,3vw,2.8rem);font-weight
 .ms2 p{color:var(--muted);line-height:1.75;font-size:.87rem}
 .ms2 ul{list-style:none;display:flex;flex-direction:column;gap:.35rem}
 .ms2 li{color:var(--muted);font-size:.87rem;padding-left:.95rem;position:relative;line-height:1.6}
-.ms2 li::before{content:'&#8250;';position:absolute;left:0;color:var(--acc)}
+
 .mtg{display:flex;flex-wrap:wrap;gap:.35rem}
 .mtg span{font-family:'DM Mono',monospace;font-size:.68rem;padding:.2rem .56rem;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.2);color:var(--acc)}
 .mmt{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.65rem}
@@ -803,6 +803,21 @@ hb.addEventListener('click',function(){hb.classList.toggle('op');mn.classList.to
 document.querySelectorAll('.ml').forEach(function(l){l.addEventListener('click',function(){hb.classList.remove('op');mn.classList.remove('op');});});
 var ro=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('vs');},i*60);});},{threshold:.1});
 document.querySelectorAll('.rv').forEach(function(el){ro.observe(el);});
+
+/* Add bullet spans to list items - bypass CSS ::before Cloudflare issues */
+document.querySelectorAll('.skl li').forEach(function(li){
+  var sp=document.createElement('span');
+  sp.textContent='›';
+  sp.style.cssText='color:var(--acc);flex-shrink:0';
+  li.insertBefore(sp,li.firstChild);
+});
+document.querySelectorAll('.ms2 li').forEach(function(li){
+  var sp=document.createElement('span');
+  sp.textContent='›';
+  sp.style.cssText='color:var(--acc);position:absolute;left:0';
+  li.insertBefore(sp,li.firstChild);
+});
+
 </script>
 </body>
 </html>
